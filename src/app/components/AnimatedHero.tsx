@@ -44,26 +44,30 @@ export default function AnimatedHero() {
           </a>
         </div>
 
-        {/* Terminal Style Intro */}
-        <TerminalIntro />
+        {/* Terminal Style Intro and Description Container */}
+        <div className="w-full max-w-2xl">
+          {/* Terminal Style Intro */}
+          <TerminalIntro />
 
-        {/* Brief Description */}
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="max-w-2xl text-gray-300 leading-relaxed"
-        >
-          With over ten years of experience in the IT industry, I am a DevOps Engineer and SRE specializing in Kubernetes, CI/CD, and infrastructure automation. I'm passionate about optimizing performance, reliability, and security through modern cloud-native solutions.
-        </motion.p>
+          {/* Brief Description */}
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="text-gray-300 leading-relaxed text-left"
+          >
+            With over ten years of experience in the IT industry, I am a DevOps Engineer and SRE specializing in Kubernetes, CI/CD, and infrastructure automation. I'm passionate about optimizing performance, reliability, and security through modern cloud-native solutions.
+          </motion.p>
+        </div>
       </motion.div>
 
       {/* Dotted Line Separator */}
       <div className="flex items-center justify-center mt-20 mb-4">
-        <div className="w-12 h-12 flex items-center justify-center">
+        <div className="flex-1 border-t border-dashed border-gray-700"></div>
+        <div className="px-6">
           <span className="text-gray-600 font-mono">&lt;/&gt;</span>
         </div>
-        <div className="flex-1 border-t border-dashed border-gray-700 mx-4"></div>
+        <div className="flex-1 border-t border-dashed border-gray-700"></div>
       </div>
     </>
   );
