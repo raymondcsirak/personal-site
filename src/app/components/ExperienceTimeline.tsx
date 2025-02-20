@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { BriefcaseIcon, GraduationCapIcon } from 'lucide-react';
+import { useRef, useState } from 'react';
 
 interface TimelineItemProps {
   title: string;
@@ -14,6 +15,19 @@ interface TimelineItemProps {
 }
 
 const TimelineItem = ({ title, company, date, description, isLeft = false, isEducation = false, year }: TimelineItemProps) => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
     <div className="relative">
       {year && (
@@ -37,23 +51,44 @@ const TimelineItem = ({ title, company, date, description, isLeft = false, isEdu
           {/* Connection Line */}
           <div className={`hidden md:block absolute top-1/2 ${isLeft ? 'right-0 mr-[-17px]' : 'left-0 ml-[-17px]'} w-4 h-px bg-gray-800`} />
           
-          <div className="p-6 bg-gray-900/50 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:bg-gray-900/60 border border-gray-800/50">
-            <div className="flex items-center mb-4">
-              <div className="p-2 bg-blue-500/5 rounded-lg mr-4">
-                {isEducation ? (
-                  <GraduationCapIcon className="w-6 h-6 text-blue-400/80" />
-                ) : (
-                  <BriefcaseIcon className="w-6 h-6 text-blue-400/80" />
-                )}
+          <motion.div
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            whileHover={{ y: -5 }}
+            transition={{ duration: 0.2 }}
+            className="relative p-6 bg-gray-900/50 rounded-lg shadow-xl transition-all duration-300 hover:bg-gray-900/60 border border-gray-800/50 group"
+          >
+            {/* Glow Effect */}
+            <div
+              className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              style={{
+                background: isHovered
+                  ? `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(56, 189, 248, 0.1) 0%, transparent 60%)`
+                  : 'none',
+                pointerEvents: 'none',
+              }}
+            />
+
+            <div className="relative z-10">
+              <div className="flex items-center mb-4">
+                <div className="p-2 bg-blue-500/5 rounded-lg mr-4">
+                  {isEducation ? (
+                    <GraduationCapIcon className="w-6 h-6 text-blue-400/80" />
+                  ) : (
+                    <BriefcaseIcon className="w-6 h-6 text-blue-400/80" />
+                  )}
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-100">{title}</h3>
+                  <p className="text-gray-400">{company}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-gray-100">{title}</h3>
-                <p className="text-gray-400">{company}</p>
-              </div>
+              <p className="text-sm text-blue-400/80 mb-3">{date}</p>
+              <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
             </div>
-            <p className="text-sm text-blue-400/80 mb-3">{date}</p>
-            <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </div>
