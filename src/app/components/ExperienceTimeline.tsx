@@ -21,7 +21,7 @@ const TimelineItem = ({ title, company, date, description, isLeft = false, isEdu
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="absolute left-1/2 transform -translate-x-1/2 -mt-12 bg-gray-900/90 px-4 py-1 rounded-full"
+          className="absolute left-1/2 transform -translate-x-1/2 -mt-12 bg-gray-950/80 px-4 py-1 rounded-full"
         >
           <span className="text-gray-400 font-mono">{year}</span>
         </motion.div>
@@ -35,23 +35,23 @@ const TimelineItem = ({ title, company, date, description, isLeft = false, isEdu
       >
         <div className={`w-full md:w-5/12 ${isLeft ? 'md:pr-8' : 'md:pl-8'} relative`}>
           {/* Connection Line */}
-          <div className={`hidden md:block absolute top-1/2 ${isLeft ? 'right-0 mr-[-17px]' : 'left-0 ml-[-17px]'} w-4 h-px bg-gray-700`} />
+          <div className={`hidden md:block absolute top-1/2 ${isLeft ? 'right-0 mr-[-17px]' : 'left-0 ml-[-17px]'} w-4 h-px bg-gray-800`} />
           
-          <div className="p-6 bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-shadow">
+          <div className="p-6 bg-gray-900/50 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:bg-gray-900/60 border border-gray-800/50">
             <div className="flex items-center mb-4">
-              <div className="p-2 bg-blue-500/10 rounded-lg mr-4">
+              <div className="p-2 bg-blue-500/5 rounded-lg mr-4">
                 {isEducation ? (
-                  <GraduationCapIcon className="w-6 h-6 text-blue-400" />
+                  <GraduationCapIcon className="w-6 h-6 text-blue-400/80" />
                 ) : (
-                  <BriefcaseIcon className="w-6 h-6 text-blue-400" />
+                  <BriefcaseIcon className="w-6 h-6 text-blue-400/80" />
                 )}
               </div>
               <div>
-                <h3 className="text-lg font-semibold">{title}</h3>
+                <h3 className="text-lg font-semibold text-gray-100">{title}</h3>
                 <p className="text-gray-400">{company}</p>
               </div>
             </div>
-            <p className="text-sm text-blue-400 mb-3">{date}</p>
+            <p className="text-sm text-blue-400/80 mb-3">{date}</p>
             <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
           </div>
         </div>
@@ -156,7 +156,7 @@ export default function ExperienceTimeline() {
   ];
 
   return (
-    <section className="py-20 bg-gray-900/50">
+    <section className="py-20 bg-gray-950/50">
       <div className="container mx-auto px-4">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -169,11 +169,11 @@ export default function ExperienceTimeline() {
         
         <div className="relative">
           {/* Center Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gray-700" />
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gray-800" />
           
           {/* Timeline Dot */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 -top-2">
-            <div className="w-4 h-4 rounded-full bg-blue-500" />
+            <div className="w-4 h-4 rounded-full bg-blue-500/50" />
           </div>
           
           {/* Timeline Items */}
