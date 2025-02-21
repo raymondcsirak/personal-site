@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { BriefcaseIcon, GraduationCapIcon } from 'lucide-react';
+import { BriefcaseIcon, GraduationCapIcon, LayersIcon } from 'lucide-react';
 import { useRef, useState } from 'react';
 
 interface TimelineItemProps {
@@ -13,6 +13,31 @@ interface TimelineItemProps {
   isEducation?: boolean;
   year?: string;
 }
+
+const KustomizeIcon = () => (
+  <div className="relative w-full h-full flex items-center justify-center">
+    <div className="absolute inset-0 flex items-center justify-center text-lg font-bold text-gray-300">K</div>
+    <div className="absolute inset-0 flex items-center justify-center text-lg font-bold text-gray-300/30 translate-x-0.5 translate-y-0.5">K</div>
+    <div className="absolute inset-0 flex items-center justify-center text-lg font-bold text-gray-300/20 translate-x-1 translate-y-1">K</div>
+  </div>
+);
+
+const TechStackIcon = ({ name, useIcon: Icon }: { name: string, useIcon?: React.ComponentType<any> }) => (
+  <div className="group relative flex items-center bg-gray-900/50 hover:bg-gray-800/50 transition-colors rounded-md px-2 py-1.5 border border-gray-800/50">
+    <div className="w-6 h-6">
+      {Icon ? (
+        <Icon className="w-full h-full text-gray-300" />
+      ) : (
+        <img 
+          src={`/icons/${name}.svg`} 
+          alt={name}
+          className="w-full h-full"
+        />
+      )}
+    </div>
+    <span className="ml-2 text-gray-300 text-sm">{name.charAt(0).toUpperCase() + name.slice(1)}</span>
+  </div>
+);
 
 const TimelineItem = ({ title, company, date, description, isLeft = false, isEducation = false, year }: TimelineItemProps) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -86,7 +111,7 @@ const TimelineItem = ({ title, company, date, description, isLeft = false, isEdu
                 </div>
               </div>
               <p className="text-sm text-blue-400/80 mb-3">{date}</p>
-              <p className="text-gray-300 text-sm leading-relaxed">{description}</p>
+              <p className="text-gray-300 text-sm leading-relaxed mb-4">{description}</p>
             </div>
           </motion.div>
         </div>
@@ -190,6 +215,14 @@ export default function ExperienceTimeline() {
     },
   ];
 
+  const techStack = [
+    "kubernetes", "helm", 
+    { name: "kustomize", icon: KustomizeIcon },
+    "argocd", "gitlab", "docker", 
+    "linux", "bash", "terraform", "vagrant", "ansible", "proxmox", 
+    "vmware"
+  ];
+
   return (
     <section className="pt-8 pb-12 bg-gray-950/50">
       <div className="container mx-auto px-4">
@@ -197,10 +230,26 @@ export default function ExperienceTimeline() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl font-bold text-center mb-16"
+          className="text-3xl font-bold text-center mb-8"
         >
           Experience & Education
         </motion.h2>
+
+        {/* Tech Stack */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-wrap justify-center gap-3 mb-16 max-w-4xl mx-auto"
+        >
+          {techStack.map((tech, index) => (
+            <TechStackIcon 
+              key={typeof tech === 'string' ? tech : tech.name} 
+              name={typeof tech === 'string' ? tech : tech.name}
+              useIcon={typeof tech === 'string' ? undefined : tech.icon}
+            />
+          ))}
+        </motion.div>
         
         <div className="relative">
           {/* Center Line */}
