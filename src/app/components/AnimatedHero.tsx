@@ -1,10 +1,47 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
+import { Check, Copy, GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import TerminalIntro from './TerminalIntro';
 
 export default function AnimatedHero() {
+  const [emailRevealed, setEmailRevealed] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const email = 'hello@raymi.xyz';
+  const emailContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (emailContainerRef.current && !emailContainerRef.current.contains(event.target as Node)) {
+        setEmailRevealed(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!emailRevealed) {
+      setEmailRevealed(true);
+      return;
+    }
+    window.location.href = `mailto:${email}`;
+  };
+
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
   return (
     <>
       <motion.div 
@@ -33,9 +70,26 @@ export default function AnimatedHero() {
 
         {/* Social Links */}
         <div className="flex gap-4 mb-12">
-          <a href="mailto:raymondcsirak@gmail.com" className="text-gray-400 hover:text-blue-500 transition-colors">
+          <div 
+            ref={emailContainerRef}
+            onClick={handleEmailClick}
+            className="text-gray-400 hover:text-blue-500 transition-colors relative group cursor-pointer"
+            title={emailRevealed ? email : "Click to reveal email"}
+          >
             <MailIcon className="w-6 h-6" />
-          </a>
+            {emailRevealed && (
+              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-900/95 text-gray-300 px-3 py-2 rounded-lg shadow-xl flex items-center gap-2 whitespace-nowrap border border-gray-800/50">
+                <span>{email}</span>
+                <button
+                  onClick={handleCopy}
+                  className="hover:text-blue-400 transition-colors"
+                  title="Copy email"
+                >
+                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+            )}
+          </div>
           <a href="https://linkedin.com/in/raymondcsirak" className="text-gray-400 hover:text-blue-500 transition-colors">
             <LinkedinIcon className="w-6 h-6" />
           </a>
