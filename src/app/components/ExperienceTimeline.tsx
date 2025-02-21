@@ -60,9 +60,9 @@ const TimelineItem = ({ title, company, date, description, isLeft = false, isEdu
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="absolute left-1/2 transform -translate-x-1/2 -mt-12 bg-gray-950/80 px-4 py-1 rounded-full"
+          className="absolute left-1/2 transform -translate-x-1/2 top-1/2"
         >
-          <span className="text-gray-400 font-mono">{year}</span>
+          <div className="w-3 h-3 rounded-full bg-blue-500/50" />
         </motion.div>
       )}
       <motion.div 
@@ -72,9 +72,8 @@ const TimelineItem = ({ title, company, date, description, isLeft = false, isEdu
         transition={{ duration: 0.5 }}
         className={`flex w-full ${isLeft ? 'justify-start' : 'justify-end'} mb-24`}
       >
-        <div className={`w-full md:w-5/12 ${isLeft ? 'md:pr-8' : 'md:pl-8'} relative`}>
-          {/* Connection Line */}
-          <div className={`hidden md:block absolute top-1/2 ${isLeft ? 'right-0 mr-[-17px]' : 'left-0 ml-[-17px]'} w-4 h-px bg-gray-800`} />
+        <div className={`w-full md:w-[47%] ${isLeft ? 'md:pr-0' : 'md:pl-0'} relative`}>
+          {/* Remove the old connection line div since we're using the triangle */}
           
           <motion.div
             ref={cardRef}
@@ -83,16 +82,25 @@ const TimelineItem = ({ title, company, date, description, isLeft = false, isEdu
             onMouseLeave={() => setIsHovered(false)}
             whileHover={{ y: -5 }}
             transition={{ duration: 0.2 }}
-            className="relative p-6 bg-gray-900/50 rounded-lg shadow-xl transition-all duration-300 hover:bg-gray-900/60 border border-gray-800/50 group"
+            className={`relative p-6 bg-gray-900/50 shadow-xl transition-all duration-300 hover:bg-gray-900/60 border border-gray-800/50 group
+              ${isLeft ? 'clip-path-right' : 'clip-path-left'}`}
+            style={{
+              clipPath: isLeft 
+                ? 'polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%)'
+                : 'polygon(20px 0, 100% 0, 100% 100%, 20px 100%, 0 50%)'
+            }}
           >
             {/* Glow Effect */}
             <div
-              className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               style={{
                 background: isHovered
                   ? `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(56, 189, 248, 0.1) 0%, transparent 60%)`
                   : 'none',
                 pointerEvents: 'none',
+                clipPath: isLeft 
+                  ? 'polygon(0 0, calc(100% - 20px) 0, 100% 50%, calc(100% - 20px) 100%, 0 100%)'
+                  : 'polygon(20px 0, 100% 0, 100% 100%, 20px 100%, 0 50%)'
               }}
             />
 
@@ -127,20 +135,21 @@ export default function ExperienceTimeline() {
       company: "Hitter Technologies srl",
       date: "March 2022 - Present",
       description: "Leading DevOps initiatives, managing Kubernetes clusters, and implementing CI/CD pipelines. Specializing in containerization, infrastructure automation, and system reliability. Key expertise in Kubernetes & IaC, containerization, CI/CD automation with GitLab and ArgoCD, backup strategies, and Linux administration.",
-      year: "2024",
+      year: "•",
     },
     {
       title: "CIO | Head of Infrastructure",
       company: "noLimits Technologies srl / Hitter Technologies",
       date: "January 2019 - Present",
       description: "Managing IT infrastructure, providing Level 3 technical support, and overseeing virtualization infrastructure. Responsible for network engineering, IT service management, and supplier relationship management.",
-      year: "2023",
+      year: "•",
     },
     {
       title: "IT Service Manager",
       company: "noLimits Technologies srl",
       date: "June 2018 - January 2019",
       description: "Led IT project management initiatives and provided Level 2 technical support for business clients. Handled TCP/IP network planning and configurations.",
+      year: "•",
     },
     {
       title: "IT Support Specialist",
@@ -181,7 +190,7 @@ export default function ExperienceTimeline() {
       date: "2022 - 2024",
       description: "Bachelor's degree in Computer Programming, focusing on software development and engineering principles.",
       isEducation: true,
-      year: "2022",
+      year: "•",
     },
     {
       title: "Cisco Networking Academy",
@@ -189,7 +198,7 @@ export default function ExperienceTimeline() {
       date: "2019",
       description: "Specialized networking certification and training.",
       isEducation: true,
-      year: "2019",
+      year: "•",
     },
     {
       title: "Journalism",
@@ -197,7 +206,7 @@ export default function ExperienceTimeline() {
       date: "2005 - 2008",
       description: "Bachelor's degree in Journalism, developing strong communication and analytical skills.",
       isEducation: true,
-      year: "2005",
+      year: "•",
     },
     {
       title: "Journalism and Multimedia",
@@ -224,7 +233,7 @@ export default function ExperienceTimeline() {
   ];
 
   return (
-    <section className="pt-8 pb-12 bg-gray-950/50">
+    <section className="pt--10 pb-12 bg-gray-950/50">
       <div className="container mx-auto px-4">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
@@ -240,7 +249,7 @@ export default function ExperienceTimeline() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 mb-16 max-w-4xl mx-auto"
+          className="flex flex-wrap justify-center gap-3 mb-12 max-w-4xl mx-auto"
         >
           {techStack.map((tech, index) => (
             <TechStackIcon 
@@ -254,11 +263,6 @@ export default function ExperienceTimeline() {
         <div className="relative">
           {/* Center Line */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gray-800" />
-          
-          {/* Timeline Dot */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 -top-2">
-            <div className="w-4 h-4 rounded-full bg-blue-500/50" />
-          </div>
           
           {/* Timeline Items */}
           {experiences.map((exp, index) => (

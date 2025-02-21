@@ -11,7 +11,7 @@ export default function Home() {
       
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 pt-20 pb-32">
+        <section className="container mx-auto px-4 pt-20 pb-16">
           <AnimatedHero />
         </section>
 
