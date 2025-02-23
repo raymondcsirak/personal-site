@@ -227,7 +227,7 @@ export default function ExperienceTimeline() {
   const techStack = [
     "kubernetes", "helm", 
     { name: "kustomize", icon: KustomizeIcon },
-    "argocd", "gitlab", "docker", 
+    "argocd", "gitlab", "docker", "grafana",
     "linux", "bash", "terraform", "vagrant", "ansible", "proxmox", 
     "vmware"
   ];
