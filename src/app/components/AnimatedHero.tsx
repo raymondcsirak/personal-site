@@ -48,58 +48,10 @@ export default function AnimatedHero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col items-center text-center"
+        className="w-full"
       >
-        {/* Profile Image */}
-        <motion.div 
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-          className="w-48 h-48 rounded-full overflow-hidden mb-8 ring-4 ring-blue-500/20"
-        >
-          <img 
-            src="/profile.jpg" 
-            alt="Raymond Csirak"
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
-
-        {/* Name and Title */}
-        <h1 className="text-4xl font-bold mb-4">Raymond Csirak</h1>
-        <h2 className="text-xl text-gray-400 mb-6">DevOps Engineer & SRE</h2>
-
-        {/* Social Links */}
-        <div className="flex gap-4 mb-12">
-          <div 
-            ref={emailContainerRef}
-            onClick={handleEmailClick}
-            className="text-gray-400 hover:text-blue-500 transition-colors relative group cursor-pointer"
-            title={emailRevealed ? email : "Click to reveal email"}
-          >
-            <MailIcon className="w-6 h-6" />
-            {emailRevealed && (
-              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gray-900/95 text-gray-300 px-3 py-2 rounded-lg shadow-xl flex items-center gap-2 whitespace-nowrap border border-gray-800/50">
-                <span>{email}</span>
-                <button
-                  onClick={handleCopy}
-                  className="hover:text-blue-400 transition-colors"
-                  title="Copy email"
-                >
-                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                </button>
-              </div>
-            )}
-          </div>
-          <a href="https://linkedin.com/in/raymondcsirak" className="text-gray-400 hover:text-blue-500 transition-colors">
-            <LinkedinIcon className="w-6 h-6" />
-          </a>
-          <a href="https://github.com/raymondcsirak" className="text-gray-400 hover:text-blue-500 transition-colors">
-            <GithubIcon className="w-6 h-6" />
-          </a>
-        </div>
-
         {/* Terminal Style Intro and Description Container */}
-        <div className="w-full max-w-4xl">
+        <div className="w-full">
           {/* Terminal Style Intro */}
           <TerminalIntro />
 
