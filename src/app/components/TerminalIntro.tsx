@@ -4,7 +4,7 @@ import TypeWriter from 'typewriter-effect';
 
 export default function TerminalIntro() {
   return (
-    <div className="font-mono text-lg mb-8 text-left">
+    <div className="font-mono text-4xl mb-8 text-left">
       <TypeWriter
         onInit={(typewriter) => {
           typewriter

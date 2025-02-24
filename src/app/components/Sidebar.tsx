@@ -45,27 +45,18 @@ export default function Sidebar() {
 
   const SidebarContent = () => (
     <>
-      <motion.div 
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-        className="w-32 h-32 md:w-32 md:h-32 rounded-full overflow-hidden mb-6 ring-4 ring-blue-500/20"
-      >
+      <div className="w-32 h-32 md:w-32 md:h-32 rounded-full overflow-hidden mb-6 ring-4 ring-blue-500/20">
         <img 
           src="/profile.jpg" 
           alt="Raymond Csirak"
           className="w-full h-full object-cover"
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-4"
-      >
+      <div className="text-center mb-4">
         <h1 className="text-2xl font-bold mb-2">Raymond Csirak</h1>
         <h2 className="text-gray-400">DevOps Engineer & SRE</h2>
-      </motion.div>
+      </div>
 
       <div className="flex gap-4 mb-8">
         <a href="https://linkedin.com/in/raymondcsirak" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors">
