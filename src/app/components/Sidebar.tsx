@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, Copy, GithubIcon, LinkedinIcon, MailIcon, Menu, X } from 'lucide-react';
+import { Check, Copy, GithubIcon, InstagramIcon, LinkedinIcon, MailIcon, Menu, TwitterIcon, X } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -64,6 +64,12 @@ export default function Sidebar() {
         </a>
         <a href="https://github.com/raymondcsirak" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors">
           <GithubIcon className="w-6 h-6" />
+        </a>
+        <a href="https://instagram.com/raymondcsirak" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors">
+          <InstagramIcon className="w-6 h-6" />
+        </a>
+        <a href="https://x.com/raymondcsirak" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors">
+          <TwitterIcon className="w-6 h-6" />
         </a>
       </div>
 
