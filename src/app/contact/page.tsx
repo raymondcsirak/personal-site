@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Check, Copy } from 'lucide-react';
 import { memo, useState } from 'react';
 import ContactForm from '../components/ContactForm';
-import ParticleBackground from '../components/ParticleBackground';
+import { Particles } from "@/components/ui/particles";
 import Sidebar from '../components/Sidebar';
 
 // Memoize the Sidebar component to prevent unnecessary re-renders
@@ -30,7 +30,14 @@ export default function Contact() {
   return (
     <main className="min-h-screen bg-gray-950 text-gray-100 relative">
       <div className="absolute inset-0 overflow-hidden">
-        <ParticleBackground />
+        <Particles
+          className="pointer-events-none"
+          quantity={120}
+          staticity={20}
+          ease={40}
+          size={1.2}
+          color="#E5E7EB"
+        />
       </div>
       
       <div className="relative z-10 flex">

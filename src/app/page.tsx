@@ -1,13 +1,20 @@
 import AnimatedHero from './components/AnimatedHero';
 import ExperienceTimeline from './components/ExperienceTimeline';
-import ParticleBackground from './components/ParticleBackground';
+import { Particles } from "@/components/ui/particles";
 import Sidebar from './components/Sidebar';
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-gray-950 text-gray-100 relative">
       <div className="absolute inset-0 overflow-hidden">
-        <ParticleBackground />
+        <Particles
+          className="pointer-events-none"
+          quantity={120}
+          staticity={20}
+          ease={40}
+          size={1.2}
+          color="#E5E7EB"
+        />
       </div>
       
       <div className="relative z-10 flex">
