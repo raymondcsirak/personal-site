@@ -84,6 +84,16 @@ export default function Sidebar() {
             </Link>
           </li>
           <li>
+            <a 
+              href="/Raymond_Csirak.pdf" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-900/50 rounded-lg transition-colors"
+            >
+              Resume
+            </a>
+          </li>
+          <li>
             <Link 
               href="/contact" 
               className="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-900/50 rounded-lg transition-colors"
