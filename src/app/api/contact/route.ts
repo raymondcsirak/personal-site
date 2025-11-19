@@ -1,34 +1,16 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+export const runtime = 'edge';
 
 // Simple in-memory store for rate limiting
+// Note: In Edge runtime, this map will be per-isolate and not shared globally.
+// For production, consider using Cloudflare KV or Durable Objects for rate limiting.
 const rateLimit = new Map<string, { count: number; timestamp: number }>();
 const RATE_LIMIT_WINDOW = 3600000; // 1 hour in milliseconds
 const MAX_REQUESTS = 5; // Max 5 emails per hour per IP
 
-// Create a transporter using SMTP
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT),
-  secure: false,
-  requireTLS: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-  tls: {
-    minVersion: 'TLSv1.2'
-  }
-});
 
-// Verify SMTP connection on startup
-transporter.verify(function (error, success) {
-  if (error) {
-    console.error('SMTP connection error:', error);
-  } else {
-    console.log('SMTP server is ready to take our messages');
-  }
-});
 
 function isBot(userAgent: string | null, email: string, message: string): boolean {
   if (!userAgent) return true;
@@ -129,11 +111,12 @@ export async function POST(req: Request) {
       );
     }
 
-    // Send email
-    await transporter.sendMail({
-      from: process.env.SMTP_USER,
+    // Send email using Resend
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const data = await resend.emails.send({
+      from: 'Contact Form <onboarding@resend.dev>', // Use your verified domain in production
+      to: 'raymondcsirak@gmail.com', // Replace with your email
       replyTo: `${name} <${email}>`,
-      to: process.env.SMTP_TO_EMAIL,
       subject: `Contact Form: ${subject}`,
       text: `From: ${name} (${email})\n\n${message}`,
       html: `
@@ -146,6 +129,14 @@ export async function POST(req: Request) {
         </div>
       `,
     });
+
+    if (data.error) {
+      console.error('Resend error:', data.error);
+      return NextResponse.json(
+        { error: 'Failed to send message' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
