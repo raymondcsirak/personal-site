@@ -115,7 +115,7 @@ export async function POST(req: Request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const data = await resend.emails.send({
       from: 'Contact Form <onboarding@resend.dev>', // Use your verified domain in production
-      to: 'raymondcsirak@gmail.com', // Replace with your email
+      to: process.env.CONTACT_EMAIL as string,
       replyTo: `${name} <${email}>`,
       subject: `Contact Form: ${subject}`,
       text: `From: ${name} (${email})\n\n${message}`,
