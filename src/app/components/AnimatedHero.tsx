@@ -63,15 +63,11 @@ export default function AnimatedHero() {
             className="text-gray-300 leading-relaxed text-left space-y-6"
           >
             <p>
-              With over a decade of experience in the IT industry, I am a seasoned DevOps Engineer and Site Reliability Engineer (SRE) with a proven track record of optimizing infrastructure and enhancing system reliability. At Hitter Technologies, I spearhead the modernization of infrastructure, leveraging my expertise in Kubernetes orchestration, Infrastructure as Code (IaC), and CI/CD automation to deliver robust and scalable solutions. My deep-rooted proficiency in Linux system administration and network engineering underpins my ability to design and implement efficient, secure, and high-availability systems.
-            </p>
-            
-            <p>
-              In my role as CIO and Head of Infrastructure at noLimits Technologies, I've demonstrated strong leadership in IT project management and infrastructure optimization. I excel in designing and implementing virtualization solutions, managing complex network architectures, and providing high-level technical support. My experience spans from hands-on system administration to strategic IT planning, enabling me to bridge the gap between technical implementation and business objectives.
+              With over a decade of experience in the IT industry, I am a DevOps and Platform Engineer focused on building resilient, scalable infrastructure. My expertise lies in modernizing legacy systems through Kubernetes orchestration (including bare-metal setups), Infrastructure as Code (IaC), and GitOps workflows using Argo CD and GitLab.
             </p>
 
             <p>
-              I am passionate about automation and cloud-native technologies, continuously exploring innovative ways to improve performance and reliability. Fluent in multiple languages (Hungarian, Romanian, English) and equipped with a diverse technical skill set, I am a relentless autodidact and problem-solver. My commitment to excellence, combined with my eagerness to embrace new challenges and drive technological advancements, makes me a valuable asset to any forward-thinking organization looking to modernize their infrastructure and streamline their operations.
+              Currently, I specialize in bridging the gap between complex operations and seamless delivery. I am passionate about leveraging AI-powered tools to accelerate engineering workflows, optimize CI/CD pipelines, and enhance system reliability. Whether designing high-availability Linux systems or automating disaster recovery strategies, I combine deep technical root-cause analysis with a strategic mindset to drive operational efficiency.
             </p>
           </motion.div>
         </div>
